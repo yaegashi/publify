@@ -1,6 +1,6 @@
 <%
 	randome_key = Time.new.to_i
-  path = @lock_path + @controller.encode(@path) + '?' + randome_key.to_s
+	path = URI.encode(@lock_path + @controller.encode(@path) + '?' + randome_key.to_s)
 	if @controller.is_image?
 %>
 
