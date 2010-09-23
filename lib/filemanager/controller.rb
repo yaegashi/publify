@@ -25,6 +25,13 @@ module Filemanager
 	      @files = @all_files.map{|f| File.directory?(@current_path + File::SEPARATOR + f) ? nil : f}.compact
 	      @file_total_size = @files.inject(0){|size, f| size + File.size(@current_path + File::SEPARATOR + f)}
 	    end
+            @relative_url_root = relative_url_root
+            if num = params[:CKEditorFuncNum]
+              session[:ckeditor_func_num] = @ckeditor_func_num = num
+            else
+              @ckeditor_func_num = session[:ckeditor_func_num]
+            end
+            @ckeditor_func_num = "1" if @ckeditor_func_num.blank?
 	  end
 
 	  def tear_off
