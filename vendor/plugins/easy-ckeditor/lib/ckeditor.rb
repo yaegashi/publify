@@ -3,7 +3,7 @@ module Ckeditor
   begin
     CONFIG = YAML.load_file("#{RAILS_ROOT}/config/ckeditor.yml")[RAILS_ENV]
   rescue => e
-    CONFIG = nil
+    CONFIG = {}
   end
   PLUGIN_NAME = 'easy-ckeditor'
   PLUGIN_PATH = "#{RAILS_ROOT}/vendor/plugins/#{PLUGIN_NAME}"
@@ -12,8 +12,8 @@ module Ckeditor
   PLUGIN_CONTROLLER_PATH = "#{PLUGIN_PATH}/app/controllers"
   PLUGIN_VIEWS_PATH = "#{PLUGIN_PATH}/app/views"
   PLUGIN_HELPER_PATH = "#{PLUGIN_PATH}/app/helpers"
-  PLUGIN_FILE_MANAGER_URI = '/fm/filemanager'
-  PLUGIN_FILE_MANAGER_UPLOAD_URI = '/ckeditor/upload'
+  PLUGIN_FILE_MANAGER_URI = CONFIG['file_manager_uri'] || '/fm/filemanager'
+  PLUGIN_FILE_MANAGER_UPLOAD_URI = CONFIG['file_manager_upload_uri'] || '/ckeditor/upload'
 
   module Helper
     def ckeditor_textarea(object, field, options = {})
