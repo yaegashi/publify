@@ -18,7 +18,7 @@ module Filemanager
 	    @current_path = @resource_path + @path
 	    @current_file = (File.directory?(@current_path) ? Dir.new(@current_path) : File.new(@current_path))
 	    @parent_path = (!@path.blank? && !@path.rindex('/').nil?) ? (@path.rindex('/') == 0 ? '/' : @path[0..(@path.rindex('/')-1)]) : nil
-	    @path_suffix = @path.index('.').nil? || @path[-1] == '.' ? '' : @path[@path.index('.')+1..-1].downcase
+	    @path_suffix = @path.rindex('.').nil? || @path[-1] == '.' ? '' : @path[@path.rindex('.')+1..-1].downcase
 	    if File.directory?(@current_path)
 	      @all_files = Dir.entries(@current_path)
 	      @directories = @all_files.map{|f| File.directory?(@current_path + File::SEPARATOR + f) ? f : nil}.compact
