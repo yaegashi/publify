@@ -1,4 +1,5 @@
 class BackendController < ContentController
+  require 'action_web_service'
   skip_before_filter :verify_authenticity_token
   cache_sweeper :blog_sweeper
 
