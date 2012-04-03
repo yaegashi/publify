@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Unicorn control script for http://blog.keshi.org/hoeng
+
+set -e
+
+case "$1" in
+start)
+        bundle exec unicorn_rails -D -E production -p 8801 --path /hogeng
+        ;;
+stop)
+        kill -TERM $(cat tmp/pids/unicorn.pid)
+        ;;
+reload)
+        kill -USR2 $(cat tmp/pids/unicorn.pid)
+        sleep 1
+        kill -QUIT $(cat tmp/pids/unicorn.pid.oldbin)
+        ;;
+*)
+        echo "Usage: $0 start|stop|reload" >&2
+        exit 1
+        ;;
+esac
