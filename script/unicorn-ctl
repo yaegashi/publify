@@ -1,15 +1,18 @@
 #!/bin/sh
 
-# Unicorn control script for http://blog.keshi.org/hoeng
-
 set -e
+
+export RBENV_ROOT=/usr/local/rbenv
+PATH=$RBENV_ROOT/shims:$RBENV_ROOT/bin:$PATH
+
+cd "${0%/*}/.."
 
 case "$1" in
 start)
-        bundle exec unicorn_rails -D -E production -p 8801 --path /hogeng
+        bundle exec unicorn_rails -D -c config/unicorn.rb
         ;;
 stop)
-        kill -TERM $(cat tmp/pids/unicorn.pid)
+        kill -QUIT $(cat tmp/pids/unicorn.pid)
         ;;
 reload)
         kill -USR2 $(cat tmp/pids/unicorn.pid)

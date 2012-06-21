@@ -1,0 +1,7 @@
+ENV["RAILS_ENV"] = "production"
+ENV["RAILS_RELATIVE_URL_ROOT"] = "/hogeng"
+working_directory "/srv/rails/hogeng"
+
+stderr_path "log/unicorn.log"
+stdout_path "log/unicorn.log"
+listen "unix:tmp/sockets/unicorn.sock"
