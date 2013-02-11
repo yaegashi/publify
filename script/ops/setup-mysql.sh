@@ -28,10 +28,11 @@ gensql $database $username $password | mysql -u root -p
 
 cat <<EOF >config/database.yml
 login: &login
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   username: $username
   password: $password
+  encoding: utf8
 
 development:
   database: ${database}_development
