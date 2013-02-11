@@ -3,11 +3,12 @@
 <tr <%= alternate_class -%>>
   <td>
   <% if upload.mime =~ /image/ %>
-    <%= link_to upload.upload_url, rel: 'lightbox' do %>
+    <%= link_to path_to_image(upload.upload_url), rel: 'lightbox' do %>
       <%= image_tag(upload.upload.thumb.url) %>
     <% end %>
   <% else %>
-    <%= link_to(upload.upload_url, upload.upload_url) -%>
+    <% upload_url = File.join(root_path, upload.upload_url) -%>
+    <%= link_to(upload_url, upload_url) -%>
   <% end %>
 	<p><%= resource_action_links(upload) %></p>
   </td>
