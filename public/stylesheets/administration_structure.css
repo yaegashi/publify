@@ -12,7 +12,7 @@ tr.noborder td {
   border-top: none;
 }
 
-.label a {
+.badge a {
   color: #fff;
 }
 
@@ -30,13 +30,6 @@ footer {
   clear: both;
 }
 
-.container-fluid .sidebar {
-	width: 180px;
-}
-
-.container-fluid .content {
-	margin-left: 200px;
-}
 
 /* Dashboard */
 
@@ -53,12 +46,12 @@ footer {
 /* Tags, categories, post types... */
 .left_form {
 	float: left; 
-	width: 380px; 
+	width: 300px; 
 	padding-top: 18px;
 }
 
 .right_table {
-	margin-left: 400px;
+	margin-left: 320px;
 	padding-top: 18px:
 }
 
@@ -77,7 +70,7 @@ footer {
 	width: 280px;
 }
 
-.editor-right .actions {
+.editor-right .form-actions {
 	padding-left: 0;
 	padding-right: 0;
 	text-align: right;
@@ -107,7 +100,7 @@ footer {
 	background: #F5F5F5;
 }
 
-#ed_toolbar_article_body_and_extended {
+#ed_toolbar_article_body_and_extended, #ed_toolbar_page_body{
 	background: #f5f5f5;
 }
 
@@ -168,17 +161,6 @@ label.editor {
 }
 
 /* Sidebars */
-#active label {
-	width: 80px;
-}
-
-#active .input {
-	margin-left: 100px;
-}
-
-#active .span4 { 
-	width: 255px;
-}
 
 .avatar {
 	float: left;
@@ -198,6 +180,3 @@ label.editor {
 	color: #00438a;
 	border-bottom: 1px solid #00438a;
 }
-
-
-

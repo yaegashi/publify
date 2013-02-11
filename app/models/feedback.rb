@@ -1,8 +1,18 @@
 require_dependency 'spam_protection'
-class Feedback < Content
-  set_table_name "feedback"
+class Feedback < ActiveRecord::Base
+  self.table_name = "feedback"
+
+  belongs_to :text_filter
 
   include TypoGuid
+
+  ## For fixing this not being Content anymore
+  include Stateful
+
+  include ContentBase
+
+  after_save :invalidates_cache?
+  after_destroy lambda { |c|  c.invalidates_cache?(true) }
 
   validate :feedback_not_closed, :on => :create
 
@@ -30,24 +40,12 @@ class Feedback < Content
     'created_at ASC'
   end
 
-  def to_param
-    guid
-  end
-
   def parent
     article
   end
 
   def permalink_url(anchor=:ignored, only_path=false)
     article.permalink_url("#{self.class.to_s.downcase}-#{id}",only_path)
-  end
-
-  def edit_url(anchor=:ignored)
-    blog.url_for(:controller => "/admin/#{self.class.to_s.downcase}s", :action =>"edit", :id => id)
-  end
-
-  def delete_url(anchor=:ignored)
-    blog.url_for(:controller => "/admin/#{self.class.to_s.downcase}s", :action =>"destroy", :id => id)
   end
 
   def html_postprocess(field, html)
@@ -123,14 +121,17 @@ class Feedback < Content
     end
   end
 
-  def mark_as_ham!
-    mark_as_ham
+  def change_state!
+    result = ''
+    if state.spam? || state.presumed_spam?
+      mark_as_ham
+      result = 'ham'
+    else
+      mark_as_spam
+      result = 'spam'
+    end
     save!
-  end
-
-  def mark_as_spam!
-    mark_as_spam
-    save
+    result
   end
 
   def report_as_spam

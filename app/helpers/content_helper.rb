@@ -1,21 +1,5 @@
 require 'digest/sha1'
 module ContentHelper
-  # Need to rewrite this one, quick hack to test my changes.
-  def page_title
-    @page_title
-  end
-
-  include SidebarHelper
-
-  def article_links(article, separator="&nbsp;<strong>|</strong>&nbsp;")
-    code = []
-    code << category_links(article)   unless article.categories.empty?
-    code << tag_links(article)        unless article.tags.empty?
-    code << comments_link(article)    if article.allow_comments?
-    code << trackbacks_link(article)  if article.allow_pings?
-    code.join(separator)
-  end
-
   def category_links(article, prefix="Posted in")
     _(prefix) + " " + article.categories.map { |c| link_to h(c.name), category_url(c), :rel => 'tag'}.join(", ")
   end

@@ -4,7 +4,6 @@ config/unicorn.rb
 *.log
 *~
 db/*.sqlite*
-db/schema.rb
 .*.swp
 .*.swo
 .DS_Store

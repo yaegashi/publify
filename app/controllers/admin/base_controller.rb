@@ -4,6 +4,15 @@ class Admin::BaseController < ApplicationController
   layout 'administration'
   before_filter :login_required, :except => [ :login, :signup ]
   before_filter :look_for_needed_db_updates, :except => [:login, :signup, :update_database, :migrate]
+  
+  def insert_editor
+    editor = 'visual'
+    editor = 'simple' if params[:editor].to_s == 'simple'
+    current_user.editor = editor
+    current_user.save!
+
+    render :partial => "#{editor}_editor"
+  end
 
   private
   def look_for_needed_db_updates

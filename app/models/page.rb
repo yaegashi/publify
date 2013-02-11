@@ -32,11 +32,10 @@ class Page < Content
   end
 
   def self.search_paginate(search_hash, paginate_hash)
-    list_function = ["Page"] + function_search_no_draft(search_hash)
+    list_function = ["Page"] + function_search_all_posts(search_hash)
     paginate_hash[:order] = 'title ASC'
     list_function << "page(paginate_hash[:page])"
     list_function << "per(paginate_hash[:per_page])"
-
     eval(list_function.join('.'))
   end
 
@@ -50,7 +49,4 @@ class Page < Content
     )
   end
 
-  def self.find_by_published_at
-    super(:created_at)
-  end
 end

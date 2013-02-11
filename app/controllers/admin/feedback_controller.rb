@@ -45,18 +45,6 @@ class Admin::FeedbackController < Admin::BaseController
     end
     @feedback = Feedback.where(conditions).order('feedback.created_at desc').page(params[:page]).per(this_blog.admin_display_elements)
   end
-
-  def article
-    @article = Article.find(params[:id])
-    if params[:ham] && params[:spam].blank?
-      @feedback = @article.comments.ham
-    end
-    if params[:spam] && params[:ham].blank?
-      @feedback = @article.comments.spam
-    end
-    @feedback ||= @article.comments
-  end
-
   def destroy
     @record = Feedback.find params[:id]
 
@@ -84,7 +72,8 @@ class Admin::FeedbackController < Admin::BaseController
 
     if request.post? and @comment.save
       # We should probably wave a spam filter over this, but for now, just mark it as published.
-      @comment.mark_as_ham!
+      @comment.mark_as_ham
+      @comment.save!
       flash[:notice] = _('Comment was successfully created.')
     end
     redirect_to :action => 'article', :id => @article.id
@@ -108,28 +97,41 @@ class Admin::FeedbackController < Admin::BaseController
     comment.attributes = params[:comment]
     if request.post? and comment.save
       flash[:notice] = _('Comment was successfully updated.')
-      redirect_to :action => 'article', :id => comment.article.id
+      redirect_to action: 'article', id: comment.article.id
     else
-      redirect_to :action => 'edit', :id => comment.id
+      redirect_to action: 'edit', id: comment.id
     end
   end
+
+  def article
+    @article = Article.find(params[:id])
+    if params[:ham] && params[:spam].blank?
+      @feedback = @article.comments.ham
+    end
+    if params[:spam] && params[:ham].blank?
+      @feedback = @article.comments.spam
+    end
+    @feedback ||= @article.comments
+  end
+
 
   def change_state
     return unless request.xhr?
 
     feedback = Feedback.find(params[:id])
-    if (feedback.state.to_s.downcase == 'spam')
-      feedback.mark_as_ham!
-    else
-      feedback.mark_as_spam!
-    end
+    template = feedback.change_state!
 
-    template = (feedback.state.to_s.downcase == 'spam') ? 'spam' : 'ham'
     render(:update) do |page|
       if params[:context] != 'listing'
         page.visual_effect :fade, "feedback_#{feedback.id}"
       else
-        page.replace("feedback_#{feedback.id}", :partial => template, :locals => {:comment => feedback})
+        if template == "ham"
+          page.visual_effect :appear, "feedback_#{feedback.id}"
+          page.visual_effect :fade, "placeholder_#{feedback.id}"
+        else
+          page.visual_effect :appear, "placeholder_#{feedback.id}"
+          page.visual_effect :fade, "feedback_#{feedback.id}"
+        end
       end
     end
   end
@@ -154,10 +156,10 @@ class Admin::FeedbackController < Admin::BaseController
         return
       end
     when 'Mark Checked Items as Ham'
-      update_feedback(items, :mark_as_ham!)
+      update_feedback(items, :change_state!)
       flash[:notice]= _("Marked %d item(s) as Ham",ids.size)
     when 'Mark Checked Items as Spam'
-      update_feedback(items, :mark_as_spam!)
+      update_feedback(items, :change_state!)
       flash[:notice]= _("Marked %d item(s) as Spam",ids.size)
     when 'Confirm Classification of Checked Items'
       update_feedback(items, :confirm_classification!)

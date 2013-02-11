@@ -88,6 +88,9 @@ Localization.define("nl_NL") do |l|
   l.store "Delete content", "Verwijder inhoud"
   l.store "Are you sure?", "Weet je het zeker?"
   l.store "Please select", "Selecteren alstublieft"
+  l.store "All categories", ""
+  l.store "All authors", ""
+  l.store "All published dates", ""
   l.store "There are no %s yet. Why don't you start and create one?", "Er zijn nog geen %s. Waarom begin je er niet een te maken?"
   l.store "or", "of"
   l.store "Save", "Bewaar"
@@ -152,6 +155,7 @@ Localization.define("nl_NL") do |l|
   l.store "Spam", "Spam"
 
   # app/views/accounts/login.html.erb
+  l.store "Sign in", ""
   l.store "I've lost my password", "Ik ben mijn wachtwoord kwijt"
   l.store "Login", "Log in"
   l.store "Password", "Wachtwoord"
@@ -195,7 +199,7 @@ Localization.define("nl_NL") do |l|
   l.store "Currently this article has the following resources", "Momenteel heeft dit artikel de volgende bronnen"
   l.store "You can associate the following resources", "Je kunt de volgende bronnen koppelen"
   l.store "Really delete attachment", "Bijlage echt verwijderen"
-  l.store "Add Another Attachment", "Voeg een andere bijlage toe"
+  l.store "Add another attachment", "Voeg een andere bijlage toe"
 
   # app/views/admin/content/_drafts.html.erb
   l.store "Drafts", "Concepten"
@@ -207,14 +211,23 @@ Localization.define("nl_NL") do |l|
   l.store "Password:", "Wachtwoord:"
   l.store "Publish", "Publiceer"
   l.store "Excerpt", "Uittreksel"
-  l.store "Excerpts are posts summaries that are shown on your blog homepage only but won’t appear on the post itself", "Uittreksels zijn een samenvatting van een post die alleen op de homepage staat, maar niet in de post zelf staan"
+  l.store "Excerpts are post summaries that show only on your blog homepage and won’t appear on the post itself", "Uittreksels zijn een samenvatting van een post die alleen op de homepage staat, maar niet in de post zelf staan"
   l.store "Uploads", "Uploads"
   l.store "Post settings", "Post instellingen"
   l.store "Publish at", "Publiceren op"
   l.store "Permalink", "Permalink"
   l.store "Article filter", "Artikel filter"
   l.store "Save as draft", "Opslaan als concept"
-
+  l.store "New article", ""
+  l.store "disabled", ""
+  l.store "Markdown with SmartyPants", ""
+  l.store "Markdown", ""
+  l.store "Texttile", ""
+  l.store "None", ""
+  l.store "SmartyPants", ""
+  l.store "Visual", ""
+  l.store "Edit article", ""
+  
   # app/views/admin/content/destroy.html.erb
   l.store "Are you sure you want to delete this article", "Weet je zeker dat je dit artikel wilt verwijderen?"
   l.store "Delete this article", "Verwijder dit artikel"
@@ -229,8 +242,13 @@ Localization.define("nl_NL") do |l|
   l.store "Feedback", "Feedback"
   l.store "Filter", "Filter"
   l.store "Manage articles", "Beheer artikelen"
+  l.store "Select a category", ""
+  l.store "Select an author", ""
+  l.store "Publication date", ""
 
   # app/views/admin/dashboard/_comments.html.erb
+  l.store "Error: can't generate secret token. Security is at risk. Please, change %s content", ""
+  l.store "For security reasons, you should restart your Typo application. Enjoy your blogging experience.", ""
   l.store "Latest Comments", "Laatste reacties"
   l.store "No comments yet", "Nog geen reacties"
   l.store "By %s on %s", "door %s op %s"
@@ -344,15 +362,91 @@ Localization.define("nl_NL") do |l|
 
   # app/views/admin/resources/index.html.erb
   l.store "Filename", "Bestandsnaam"
+  l.store "Browse", ""
+
+  # app/views/admin/seo/index.html.erb
+  l.store "SEO", ""
+  l.store "Global SEO settings", ""
+  l.store "Titles", ""
+  l.store "General settings", ""
+  l.store "Use meta keywords", ""
+  l.store "Meta description", ""
+  l.store "Meta keywords", ""
+  l.store "Use RSS description", ""
+  l.store "RSS description message", ""
+  l.store "Indexing", ""
+  l.store "Do not index categories", ""
+  l.store "Checking this box will add <code>noindex, follow</code> meta tags in every category page, removing them from search engines and preventing duplicate content issues", ""
+  l.store "Do not index tags", ""
+  l.store "Checking this box will add <code>noindex, follow</code> meta tags in every tags page, removing them from search engines and preventing duplicate content issues", ""
+  l.store "Robots.txt", ""
+  l.store "You robots.txt file is not writeable. Typo won't be able to write it", ""
+  l.store "Use dofollow in comments", ""
+  l.store "You may want to moderate feedback when turning this on", ""
+  l.store "Use canonical URL", ""
+  l.store "Read more about %s", ""
+  l.store "Google", ""
+  l.store "Google Analytics", ""
+  l.store "Google Webmaster Tools validation link", ""
+  l.store "Custom tracking code", ""
+  l.store "Global settings", ""
+  l.store "This will display", ""
+  l.store "at the bottom of each post in the RSS feed", ""
+  l.store "Here you can add anything you want to appear in your application header, such as analytics service tracking code.", "" 
+
+  # app/views/admin/seo/permalinks.html.erb
+  l.store "Typo offers you the ability to create a custom URL structure for your permalinks and archives. This can improve the aesthetics, usability, and forward-compatibility of your links.", ""
+  l.store "Here are some examples to get you started.", ""
+  l.store "Permalink format", ""
+  l.store "Date and title", ""
+  l.store "Month and title", ""
+  l.store "Title only", ""
+  l.store "You can custom your URL structure using the following tags:", ""
+  l.store "your article slug. <strong>Using this slug is mandatory</strong>.", ""
+  l.store "your article year of publication.", ""
+  l.store "your article month of publication.", ""
+  l.store "your article day of publication.", ""
+  l.store "Permalinks", ""
+  l.store "Custom", ""
+
+  # app/views/admin/seo/titles.html.erb
+  l.store "Title settings", ""
+  l.store "Home", ""
+  l.store "Title template", ""
+  l.store "Description template", ""
+  l.store "Articles", ""
+  l.store "Pages", ""
+  l.store "Paginated archives", ""
+  l.store "Dated archives", ""
+  l.store "Author page", ""
+  l.store "Search results", ""
+  l.store "Help on title settings", ""
+  l.store "Replaced with the title of the article/page", ""
+  l.store "The blog's name", ""
+  l.store "The blog's tagline / description", ""
+  l.store "Replaced with the post/page excerpt", ""
+  l.store "Replaced with the article tags (comma separated)", ""
+  l.store "Replaced with the article categories (comma separated)", ""
+  l.store "Replaced with the article/page title", ""
+  l.store "Replaced with the category/tag name", ""
+  l.store "Replaced with the current search phrase", ""
+  l.store "Replaced with the current time", ""
+  l.store "Replaced with the current date", ""
+  l.store "Replaced with the current month", ""
+  l.store "Replaced with the current year", ""
+  l.store "Replaced with the current page number", ""
+  l.store "Replaced by the archive date", ""
+  l.store "These tags can be included in your templates and will be replaced when displaying the page.", ""
 
   # app/views/admin/settings/_submit.html.erb
   l.store "Update settings", "Werk instellingen bij"
 
   # app/views/admin/settings/feedback.html.erb
+  l.store "Spam protection", ""
   l.store "Enable comments by default", "Commentaren standaard toestaan"
   l.store "Enable Trackbacks by default", "Trackbacks standaard toestaan"
   l.store "Enable feedback moderation", "Feedback controle aanzetten"
-  l.store "You can enable site wide feeback moderation. If you do so, no comment or trackback will appear on your blog unless you validate it", "Je kunt voor de hele site feedback controle aanzetten. Als je dat doet zal geen enkel commentaar of trackback op je blog verschijnen totdat je het goedkeurt"
+  l.store "You can enable site wide feedback moderation. If you do so, no comment or trackback will appear on your blog unless you validate it.", "Je kunt voor de hele site feedback controle aanzetten. Als je dat doet zal geen enkel commentaar of trackback op je blog verschijnen totdat je het goedkeurt"
   l.store "Comments filter", "Commentaren filter"
   l.store "Enable gravatars", "Enable gravatars"
   l.store "Show your email address", "Toon je e-mail adres"
@@ -360,7 +454,7 @@ Localization.define("nl_NL") do |l|
   l.store "Typo can notify you when new articles or comments are posted", "Typo can je notificeren wanneer nieuwe artikelen of commentaren gepost worden"
   l.store "Source Email", "Bron e-mail"
   l.store "Email address used by Typo to send notifications", "E-mail adres dat Typo gebruikt om notificaties te versturen"
-  l.store "Enabling spam protection will make typo compare the IP address of posters as well as the contents of their posts against local and remote blacklists. Good defense against spam bots", "Het aanzetten van spambescherming zorgt dat typo het IP-adres en de inhoud van reacties vergelijkt met lokale en centrale zwarte lijsten. Een goede bescherming tegen spam robots"
+  l.store "Enabling spam protection will make Typo compare the IP address of posters as well as the contents of their posts against local and remote blacklists. Good defense against spam bots", "Het aanzetten van spambescherming zorgt dat typo het IP-adres en de inhoud van reacties vergelijkt met lokale en centrale zwarte lijsten. Een goede bescherming tegen spam robots"
   l.store "Enable spam protection", "Gebruik spam-bescherming"
   l.store "Akismet Key", "Akismet sleutel"
   l.store "Typo can (optionally) use the %s spam-filtering service.  You need to register with Akismet and receive an API key before you can use their service.  If you have an Akismet key, enter it here", "Typo kan (optioneel) de %s spam-filter dienst gebruiken. Je moet een registratie bij Akismet hebben en een API sleutel voordat je deze dienst kunt gebruiken. Als je een Akismet sleutel hebt, vul die dan hier in"
@@ -408,7 +502,8 @@ Localization.define("nl_NL") do |l|
   l.store "You robots.txt file is not writeable. Typo won't be able to write it", "Je robots.txt bestand is niet schrijfbaar. Typo kan het niet wijzigen"
   l.store "Search Engine Optimization", "Zoekmachine optimalisatie"
   l.store "This will display", "Dit zorgt er voor dat "
-  l.store "at the bottom of each of your post in the RSS feed", " onderaan elke post in je RSS-feed verschijnt"
+  l.store "at the bottom of each post in the RSS feed", " onderaan elke post in je RSS-feed verschijnt"
+  l.store "Here you can add anything you want to appear in your application header, such as analytics service tracking code.", ""
 
   # app/views/admin/settings/update_database.html.erb
   l.store "Information", "Informatie"
@@ -428,8 +523,8 @@ Localization.define("nl_NL") do |l|
   l.store "When publishing articles, Typo can send trackbacks to websites that you link to. This should be disabled for private blogs as it will leak non-public information to sites that you're discussing. For public blogs, there's no real point in disabling this.", "Wanneer je een artikel publiceert kan Typo een trackback sturen naar de sites waaraan je linkt. Dit zou voor priv&eacute;-blogs uit moeten staan, omdat het niet-publieke informatie 'lekt' naar sites die je bediscussieert. Voor publieke blogs is er geen goede reden om het uit te zetten."
   l.store "URLs to ping automatically", ""
   l.store "Latitude, Longitude", ""
-  l.store "your lattitude and longitude", ""
-  l.store "exemple", ""
+  l.store "your latitude and longitude", ""
+  l.store "example", ""
   l.store "Write", "Schrijf"
 
   # app/views/admin/sidebar/_publish.html.erb
@@ -439,13 +534,28 @@ Localization.define("nl_NL") do |l|
   l.store "Drag some plugins here to fill your sidebar", "Sleep wat plugins naar hier om de zijbalk te vullen"
 
   # app/views/admin/sidebar/index.html.erb
-  l.store "Drag and drop to change the sidebar items displayed on this blog.  To remove items from the sidebar just click remove  Changes are saved immediately, but not activated until you click the 'Publish' button", "Sleep dingen heen en weer om de zijbalk van dit blog aan te passen. Om dingen te verwijderen klik je op verwijderen  Wijzigen worden automatisch opgeslagen, maar niet geactiveerd totdat je de 'Publiceer' knop klikt"
+  l.store "Drag and drop to change the sidebar items displayed on this blog. To remove items from the sidebar just click 'remove'. Changes are saved immediately, but not activated until you click the 'Publish changes' button", "Sleep dingen heen en weer om de zijbalk van dit blog aan te passen. Om dingen te verwijderen klik je op verwijderen  Wijzigen worden automatisch opgeslagen, maar niet geactiveerd totdat je de 'Publiceer' knop klikt"
   l.store "Available Items", "Beschikbare dingen"
   l.store "You have no plugins installed", "Je hebt geen plugins ge&iuml;installeerd"
   l.store "Active Sidebar items", "Actieve zijbalk dingen"
   l.store "Get more plugins", "Haal meer thema's op"
   l.store "Sidebar", "Zijbalk"
   l.store "Publish changes", "Publiceer wijzigingen"
+  l.store "Adds sidebar links to any Amazon.com books linked in the body of the page", ""
+  l.store "Displays links to monthly archives", ""
+  l.store "Displays a list of authors ordered by name with links to their articles and profile", ""
+  l.store "Livesearch", ""
+  l.store "Adds livesearch to your Typo blog", ""
+  l.store "This widget just displays links to Typo main site, this blog's admin and RSS.", ""
+  l.store "Page", ""
+  l.store "Show pages for this blog", ""
+  l.store "Adds basic search sidebar in your Typo blog", ""
+  l.store "Static", ""
+  l.store "Static content, like links to other sites, advertisements, or blog meta-information", ""
+  l.store "Show most popular tags for this blog", ""
+  l.store "RSS and Atom feeds", ""
+  l.store "XML Syndication", ""
+  l.store "remove", "supprimer"
 
   # app/views/admin/tags/_form.html.erb
   l.store "Display name", "Schermnaam"
@@ -470,6 +580,7 @@ Localization.define("nl_NL") do |l|
   l.store "Theme editor", "Thema editor"
 
   # app/views/admin/themes/index.html.erb
+  l.store "Choose theme", ""
   l.store "Active theme", "Actieve thema's"
   l.store "Get more themes", "Haal meer thema's op"
   l.store "You can download third party themes from officially supported %s ", "Je kunt thema's van derden downloaden van officieel ondersteunde %s "
@@ -484,7 +595,7 @@ Localization.define("nl_NL") do |l|
   l.store "User's status", "Status van de gebruiker"
   l.store "Active", "Actief"
   l.store "Inactive", "Inactief"
-  l.store "Profile Settings", "Profiel instellingen"
+  l.store "Profile settings", "Profiel instellingen"
   l.store "Firstname", "Voornaam"
   l.store "Lastname", "Achternaam"
   l.store "Nickname", "Bijnaam"
@@ -494,9 +605,9 @@ Localization.define("nl_NL") do |l|
   l.store "Send notification messages via email", "Zend notificaties via e-mail"
   l.store "Send notification messages when new articles are posted", "Zend notificaties wanneer nieuwe artikelen worden gepubliceerd"
   l.store "Send notification messages when comments are posted", "Zend notificaties wanneer commentaren geplaatst worden"
-  l.store "Contact Options", "Contact opties"
+  l.store "Contact options", "Contact opties"
   l.store "Your site", "Je site"
-  l.store "display url on public profile", "toon URL op publiek profiel"
+  l.store "display URL on public profile", "toon URL op publiek profiel"
   l.store "Your MSN", "Je msn"
   l.store "display MSN ID on public profile", "toon MSN op publiek profiel"
   l.store "Your Yahoo ID", "Je Yahoo ID"
@@ -506,7 +617,7 @@ Localization.define("nl_NL") do |l|
   l.store "Your AIM id", "Je AIM id"
   l.store "display AIM ID on public profile", "toon AIM ID op publiek profiel"
   l.store "Your Twitter username", "Je Twitter gebruikersnaam"
-  l.store "display twitter on public profile", "toon twitter op publiek profiel"
+  l.store "display Twitter on public profile", "toon twitter op publiek profiel"
   l.store "Tell us more about you", "Vertel ons meer over jezelf"
 
   # app/views/admin/users/destroy.html.erb
@@ -522,7 +633,8 @@ Localization.define("nl_NL") do |l|
   l.store "Comments", "Reacties"
   l.store "State", "Status"
   l.store "%s user", "%s gebruiker"
-
+  l.store "Manage users", ""
+  
   # app/views/admin/users/new.html.erb
   l.store "Add User", "Gebruiker toevoegen"
 
@@ -565,6 +677,7 @@ Localization.define("nl_NL") do |l|
   l.store "RSS feed for this post", "RSS feed voor dit bericht"
   l.store "trackback uri", "trackback uri"
   l.store "Comments are disabled", "Reacties zijn niet mogelijk"
+  l.store "Trackbacks are disabled", ""
 
   # app/views/authors/show.html.erb
   l.store "Web site:", "Website:"
@@ -580,7 +693,13 @@ Localization.define("nl_NL") do |l|
   l.store "This comment has been flagged for moderator approval.", "Deze reactie is aangemerkt voor goedkeuring."
 
   # app/views/layouts/administration.html.erb
+  l.store "Logged in as %s", ""
   l.store "%s &raquo;", ""
+  l.store "Help", ""
+  l.store "Documentation", ""
+  l.store "Report a bug", ""
+  l.store "In page plugins", ""
+  l.store "Sidebar plugins", ""
   l.store "is proudly powered by", "wordt trots aangedreven door"
   l.store "Dashboard", "Dashboard"
 
@@ -589,7 +708,7 @@ Localization.define("nl_NL") do |l|
   l.store "Welcome to your %s blog setup. Just fill in your blog title and your email, and Typo will take care of everything else", "Welkom bij je %s blog setup. Vul een titel voor je blog in, en een e-mailadres, en Typo zorgt voor de rest"
 
   # app/views/shared/_confirm.html.erb
-  l.store "Congratulation!", "Gefeliciteerd!"
+  l.store "Congratulations!", "Gefeliciteerd!"
   l.store "You have successfully signed up", "Je bent succesvol aangemeld"
   l.store "<strong>Login:</strong> %s", "<strong>Inlognaam:</strong> %s"
   l.store "<strong>Password:</strong> %s", "<strong>Wachtwoord:</strong> %s"

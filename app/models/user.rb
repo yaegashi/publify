@@ -56,8 +56,7 @@ class User < ActiveRecord::Base
 
 
   def self.authenticate(login, pass)
-    find(:first,
-         :conditions => ["login = ? AND password = ? AND state = ?", login, password_hash(pass), 'active'])
+    where("login = ? AND password = ? AND state = ?", login, password_hash(pass), 'active').first
   end
 
   def update_connection_time
@@ -136,6 +135,10 @@ class User < ActiveRecord::Base
     editor == 'simple'
   end
 
+  def visual_editor?
+    editor == 'visual'
+  end
+
   def password=(newpass)
     @password = newpass
   end
@@ -153,19 +156,28 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    name
+    if !nickname.blank?
+      nickname
+    elsif !name.blank?
+      name
+    else
+      login
+    end
   end
 
   def permalink
     login
   end
 
-  def to_param
-    permalink
-  end
-
   def admin?
     profile.label == Profile::ADMIN
+  end
+
+  def generate_password!
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    newpass = ""
+    1.upto(7) { |i| newpass << chars[rand(chars.size-1)] }
+    self.password = newpass
   end
 
   protected

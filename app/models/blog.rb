@@ -7,7 +7,6 @@
 #
 class Blog < ActiveRecord::Base
   include ConfigManager
-  extend ActiveSupport::Memoizable
   include Rails.application.routes.url_helpers
 
   attr_accessor :custom_permalink
@@ -29,7 +28,7 @@ class Blog < ActiveRecord::Base
   setting :canonical_server_url,       :string, ''  # Deprecated
   setting :lang,                       :string, 'en_US'
   setting :title_prefix,               :integer, 0 # Deprecated but needed for a migration
-  
+
   # Spam
   setting :sp_global,                  :boolean, false
   setting :sp_article_auto_close,      :integer, 0
@@ -99,12 +98,12 @@ class Blog < ActiveRecord::Base
   setting :search_title_template,      :string, "Results for %search% | %blog_name% %page%" # OK
   setting :search_desc_template,       :string, "Results for %search% | %blog_name% | %blog_subtitle% %page%" # OK
   setting :custom_tracking_field,      :string, ''
-#  setting :meta_author_template,       :string, "%blog_name% | %nickname%"
+  # setting :meta_author_template,       :string, "%blog_name% | %nickname%"
 
-# Error handling
+  # Error handling
   setting :title_error_404,            :string, "Page not found"
   setting :msg_error_404,              :string, "<p>The page you are looking for has moved or does not exist.</p>"
-  
+
   validate :permalink_has_identifier
 
   def initialize(*args)
@@ -149,10 +148,12 @@ class Blog < ActiveRecord::Base
   end
 
   # The +Theme+ object for the current theme.
-  def current_theme
-    Theme.find(theme)
+  def current_theme reload = nil
+    if reload
+      @current_theme = nil
+    end
+    @current_theme ||= Theme.find(theme)
   end
-  memoize :current_theme
 
   # Generate a URL based on the +base_url+.  This allows us to generate URLs
   # without needing a controller handy, so we can produce URLs from within models
@@ -191,7 +192,11 @@ class Blog < ActiveRecord::Base
 
   # The URL for a static file.
   def file_url(filename)
-    url_for "files/#{filename}", :only_path => false
+    if CarrierWave.configure { |config| config.storage == CarrierWave::Storage::Fog }
+      filename
+    else
+      url_for "files/#{filename}", :only_path => false
+    end
   end
 
   def requested_article(params)
@@ -226,6 +231,14 @@ class Blog < ActiveRecord::Base
 
   def text_filter_object
     text_filter.to_text_filter
+  end
+
+  def urls_to_ping_for(article)
+    urls_to_ping = []
+    self.ping_urls.gsub(/ +/, '').split(/[\n\r]+/).map(&:strip).delete_if{|u| article.already_ping?(u)}.uniq.each do |url|
+      urls_to_ping << article.pings.build("url" => url)
+    end
+    urls_to_ping
   end
 
   private
